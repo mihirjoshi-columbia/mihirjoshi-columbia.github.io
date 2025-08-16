@@ -38,6 +38,7 @@
         padding: 80px 20px;
         display: grid;
         place-items: center;
+        scroll-margin-top: 80px; /* ensure anchor links do not hide under fixed nav */
       }
       .container { width: min(1100px, 92vw); margin: 0 auto; }
 
@@ -133,9 +134,9 @@
     <!-- React via CDN + in-browser Babel (fine for a lightweight portfolio) -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <script type="text/babel">
+    <script type="text/babel" data-presets="env,react">
       const { useEffect, useRef } = React;
 
       // ------- Content you can edit -------
@@ -265,4 +266,3 @@
     </script>
   </body>
 </html>
-
