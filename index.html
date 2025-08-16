@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mihir Joshi — Portfolio</title>
+
+    <!-- Fonts (system-first) -->
+    <style>
+      :root {
+        --bg: #0f1115;
+        --card: #151822;
+        --muted: #9aa4b2;
+        --text: #e6e9ef;
+        --accent: #8ab4ff;
+        --accent-2: #7cf0bd;
+        --border: #232738;
+        --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        scroll-behavior: smooth;
+      }
+      /* Scroll snapping */
+      main {
+        scroll-snap-type: y mandatory;
+        overflow-y: auto;
+        height: 100vh;
+      }
+      section {
+        scroll-snap-align: start;
+        min-height: 100vh;
+        box-sizing: border-box;
+        padding: 80px 20px;
+        display: grid;
+        place-items: center;
+      }
+      .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+      /* Top nav */
+      .nav {
+        position: fixed;
+        top: 16px; left: 50%; transform: translateX(-50%);
+        display: flex; gap: 8px; align-items: center; justify-content: center;
+        z-index: 50;
+        background: rgba(15,17,21,0.6);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 12px;
+        box-shadow: var(--shadow);
+      }
+      .nav a {
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        transition: background .2s, color .2s;
+      }
+      .nav a.active { color: var(--text); background: #1b2030; }
+      .nav a:hover { color: var(--text); }
+
+      /* Hero */
+      .hero {
+        display: grid; gap: 18px; text-align: center; place-items: center;
+      }
+      .chip { color: var(--accent); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 12px; }
+      .title {
+        font-size: clamp(48px, 8vw, 96px);
+        line-height: 1;
+        margin: 8px 0 0 0;
+        letter-spacing: -0.02em;
+      }
+      .subtitle { color: var(--muted); font-size: clamp(16px, 2.2vw, 20px); }
+
+      /* Cards */
+      .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .card {
+        background: linear-gradient(180deg, #161a27 0%, #121522 100%);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      }
+      .card:hover { transform: translateY(-3px); border-color: #2b3248; }
+      .card h3 { margin: 0 0 6px 0; font-size: 18px; }
+      .card p { margin: 6px 0 0 0; color: var(--muted); font-size: 14px; }
+      .meta { color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+      /* Section headings */
+      .section-head {
+        display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px;
+      }
+      .section-head h2 { font-size: clamp(28px, 4vw, 40px); margin: 0; letter-spacing: -0.01em; }
+      .section-head p { margin: 0; color: var(--muted); }
+
+      /* Footer/contact */
+      .contact {
+        display: grid; gap: 18px; text-align: center;
+      }
+      .cta {
+        display: inline-block; padding: 12px 18px; border-radius: 12px; border: 1px solid var(--border); background: #161a27;
+        color: var(--text); text-decoration: none; font-weight: 600; box-shadow: var(--shadow);
+      }
+
+      /* Small screens */
+      @media (max-width: 640px) {
+        .nav { left: 12px; right: 12px; transform: none; }
+        .section-head { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Simple fixed nav -->
+    <nav class="nav" id="top-nav">
+      <a href="#home" data-id="home" class="active">Home</a>
+      <a href="#experience" data-id="experience">Experience</a>
+      <a href="#projects" data-id="projects">Projects</a>
+      <a href="#contact" data-id="contact">Contact</a>
+    </nav>
+
+    <main id="root" aria-label="Portfolio sections">
+      <!-- React mounts here -->
+    </main>
+
+    <!-- React via CDN + in-browser Babel (fine for a lightweight portfolio) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useEffect, useRef } = React;
+
+      // ------- Content you can edit -------
+      const EXPERIENCE = [
+        { role: "Quant Dev Intern", org: "Hedge Fund, TX", dates: "Summer 2025", blurb: "Infra for portfolio mgmt + research tooling (Python/C++)." },
+        { role: "M&A Intern", org: "Property Tech, NYC", dates: "2024", blurb: "Built deal analytics dashboards; API integrations." },
+        { role: "VP", org: "Columbia Chapter", dates: "2024–", blurb: "Leadership, events, partnerships." },
+      ];
+
+      const PROJECTS = [
+        { title: "DealHive", tag: "Platform", blurb: "End-to-end M&A workflow + lead exchange with fee splits.", link: "#" },
+        { title: "Kalshi Dashboard", tag: "Trading", blurb: "Event markets dashboard, PostgreSQL + Rust/C# API + Electron.", link: "#" },
+        { title: "Geospatial Live", tag: "Civic Tech", blurb: "IoT + GIS real-time infrastructure monitoring.", link: "#" },
+      ];
+
+      const CONTACT = {
+        email: "mihir.joshi@example.com", // change me
+        linkedin: "https://www.linkedin.com/in/mihir-joshi/", // change me
+        github: "https://github.com/mihirjoshi-columbia", // change me
+      };
+      // -----------------------------------
+
+      function useSectionObserver(ids) {
+        const navEl = useRef(null);
+        useEffect(() => {
+          navEl.current = document.getElementById("top-nav");
+          const links = Array.from(navEl.current.querySelectorAll("a"));
+
+          const observer = new IntersectionObserver(
+            entries => {
+              entries.forEach(entry => {
+                const id = entry.target.getAttribute("id");
+                if (entry.isIntersecting) {
+                  links.forEach(a => a.classList.toggle("active", a.dataset.id === id));
+                }
+              });
+            },
+            { root: null, threshold: 0.6 }
+          );
+          ids.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+          });
+          return () => observer.disconnect();
+        }, [ids.join(",")]);
+        return navEl;
+      }
+
+      const Section = ({ id, children, ariaLabel }) => (
+        <section id={id} aria-label={ariaLabel}>
+          <div className="container">{children}</div>
+        </section>
+      );
+
+      const Hero = () => (
+        <div className="hero">
+          <span className="chip">Landing</span>
+          <h1 className="title">TBD</h1>
+          <p className="subtitle">This is the landing screen. Scroll ↓ or use the nav to explore.</p>
+        </div>
+      );
+
+      const Experience = () => (
+        <>
+          <div className="section-head">
+            <h2>Experience</h2>
+            <p>Selected roles & impact</p>
+          </div>
+          <div className="grid">
+            {EXPERIENCE.map((x, i) => (
+              <article key={i} className="card">
+                <div className="meta">{x.dates}</div>
+                <h3>{x.role} · {x.org}</h3>
+                <p>{x.blurb}</p>
+              </article>
+            ))}
+          </div>
+        </>
+      );
+
+      const Projects = () => (
+        <>
+          <div className="section-head">
+            <h2>Projects</h2>
+            <p>Things I built or shipped</p>
+          </div>
+          <div className="grid">
+            {PROJECTS.map((p, i) => (
+              <a key={i} className="card" href={p.link} target="_blank" rel="noreferrer">
+                <div className="meta">{p.tag}</div>
+                <h3>{p.title}</h3>
+                <p>{p.blurb}</p>
+              </a>
+            ))}
+          </div>
+        </>
+      );
+
+      const Contact = () => (
+        <div className="contact">
+          <div className="section-head" style={{justifyContent:'center'}}>
+            <h2>Contact</h2>
+          </div>
+          <p className="subtitle">Open to collaboration, roles, and good ideas.</p>
+          <div style={{display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap'}}>
+            <a className="cta" href={`mailto:${CONTACT.email}`}>Email</a>
+            <a className="cta" href={CONTACT.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="cta" href={CONTACT.github} target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      );
+
+      function App() {
+        useSectionObserver(["home","experience","projects","contact"]);
+        return (
+          <>
+            <Section id="home" ariaLabel="Landing"><Hero/></Section>
+            <Section id="experience" ariaLabel="Experience"><Experience/></Section>
+            <Section id="projects" ariaLabel="Projects"><Projects/></Section>
+            <Section id="contact" ariaLabel="Contact"><Contact/></Section>
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App/>);
+    </script>
+  </body>
+</html>
+
