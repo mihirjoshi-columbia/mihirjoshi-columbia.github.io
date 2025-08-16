@@ -8,7 +8,7 @@
     <!-- Fonts (system-first) -->
     <style>
       :root {
-        /* Dynamic theme variables (will be updated on scroll) */
+        /* Static dark theme */
         --bg: #0e0e10;        /* page background */
         --card: #151515;      /* card/terminal body */
         --muted: #a9a9ad;     /* secondary text */
@@ -17,6 +17,9 @@
         --accent-2: #c0c0c7;  /* meta accents */
         --border: #252528;    /* borders */
         --shadow: 0 12px 40px rgba(0,0,0,0.35);
+        --navbg: rgba(15,17,21,0.6);
+        --navpill: #222;
+        --cta-bg: #161a27;
       }
       html, body {
         height: 100%;
@@ -44,7 +47,7 @@
         top: 16px; left: 50%; transform: translateX(-50%);
         display: flex; gap: 8px; align-items: center; justify-content: center;
         z-index: 50;
-        background: rgba(15,17,21,0.6);
+        background: var(--navbg);
         backdrop-filter: blur(8px);
         border: 1px solid var(--border);
         border-radius: 999px;
@@ -60,7 +63,7 @@
         border-radius: 999px;
         transition: background .2s, color .2s;
       }
-      .nav a.active { color: var(--text); background: #222; }
+      .nav a.active { color: var(--text); background: var(--navpill); }
       .nav a:hover { color: var(--text); }
 
       /* Terminal (hero replacement) */
@@ -110,30 +113,34 @@
 
       /* Timeline */
       .timeline { position: relative; }
-      .timeline::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--border); }
-      .timeline-item { position: relative; margin: 0 0 18px 0; padding-left: 40px; }
+      .timeline::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, rgba(43,50,72,0.8), rgba(43,50,72,0.2)); filter: blur(.2px); }
+      .timeline-item { position: relative; margin: 0 0 18px 0; padding-left: 40px; contain: content; content-visibility: auto; }
+      .timeline-node { position:absolute; left: 12px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: #3a5ca9; box-shadow: 0 0 0 2px rgba(58,92,169,0.25); opacity:.9; }
+      .timeline-connector { position:absolute; left: 21px; top: 22px; width: 18px; height: 2px; background: #2b3248; transform-origin: left center; transition: transform .2s ease, background .2s ease; }
       .timeline-card { margin-left: 0; }
       .timeline-card:hover { transform: translateY(-3px) scale(1.02); border-color: #2b3248; }
+      .timeline-item:hover .timeline-connector { transform: scaleX(1.12); background:#3a5ca9; }
       .timeline-card .meta-row { display: flex; gap: 8px; align-items: center; color: var(--accent-2); font-size: 12px; font-weight: 700; text-transform: uppercase; }
       .timeline-card .meta-row .sep { opacity: 0.6; }
       .timeline-card ul { margin: 10px 0 0 18px; padding: 0; color: var(--muted); }
       .timeline-card li { margin: 6px 0; }
+      .chip { display:inline-block; padding: 4px 8px; border:1px solid var(--border); border-radius:999px; font-size:11px; letter-spacing:.06em; color:var(--accent-2); text-transform:uppercase; }
+      .meta-chips { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
 
-      /* Projects (restyled) */
-      .projects-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-      .project-card {
-        position: relative; overflow: hidden;
-        background: linear-gradient(180deg, #181818 0%, #121212 100%);
-        border: 1px solid var(--border); border-radius: 18px; padding: 20px;
-        box-shadow: var(--shadow);
-        transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-      }
-      .project-card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: linear-gradient(180deg, #2b3248, transparent); opacity:.9; }
-      .project-card:hover { transform: translateY(-4px) scale(1.01); border-color: #2b3248; }
-      .project-head { display:flex; align-items:center; gap:10px; }
-      .project-tag { color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-      .project-title { margin: 4px 0 0 0; font-size: 18px; letter-spacing: -0.01em; }
-      .project-blurb { margin: 8px 0 0 0; color: var(--muted); font-size: 14px; }
+      /* Projects: Snake mini-game */
+      .snake { background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); padding: 16px; width: min(900px, 92vw); }
+      .snake-header { display:flex; align-items:center; justify-content: space-between; margin-bottom: 10px; }
+      .snake-title { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
+      .snake-meta { display:flex; gap: 12px; align-items:center; }
+      .snake-score { font-weight: 700; color: var(--accent-2); }
+      .snake-canvas-wrap { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+      .snake-canvas { display:block; width: 100%; height: 420px; background: #0f1116; }
+      .snake-controls { display:flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
+      .snake-overlay { position:absolute; inset:0; display:grid; place-items:center; background: rgba(4,6,10,0.45); backdrop-filter: blur(2px); color: var(--text); font-weight:700; letter-spacing: .02em; }
+      .snake-grid { position:absolute; inset:0; pointer-events:none; opacity:.06; }
+      .snake-pad { display:none; gap:8px; justify-content:center; align-items:center; margin-top:10px; }
+      .snake-pad .btn { width:42px; height:42px; border-radius:10px; border:1px solid var(--border); background:#121522; color:var(--text); display:grid; place-items:center; }
+      @media (max-width: 640px) { .snake-pad { display:flex; } }
 
       /* Hero canvas behind terminal */
       .hero-area { position: relative; width: min(1000px, 92vw); height: 460px; margin: 0 auto; }
@@ -152,7 +159,7 @@
         display: grid; gap: 18px; text-align: center;
       }
       .cta {
-        display: inline-block; padding: 12px 18px; border-radius: 12px; border: 1px solid var(--border); background: #161a27;
+        display: inline-block; padding: 12px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--cta-bg);
         color: var(--text); text-decoration: none; font-weight: 600; box-shadow: var(--shadow);
       }
 
@@ -170,7 +177,6 @@
     <nav class="nav" id="top-nav">
       <a href="#home" data-id="home" class="active">Home</a>
       <a href="#experience" data-id="experience">Experience</a>
-      <a href="#projects" data-id="projects">Projects</a>
       <a href="#contact" data-id="contact">Contact</a>
     </nav>
 
@@ -183,41 +189,14 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Theme gradient on scroll (dark -> light) -->
-    <script>
-      (function(){
-        function lerp(a,b,t){ return a + (b-a)*t; }
-        function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
-        function setTheme(t){
-          const bg = `hsl(${lerp(230, 0, t)}, ${lerp(8, 0, t)}%, ${lerp(5, 98, t)}%)`;
-          const text = `hsl(0, 0%, ${lerp(91, 10, t)}%)`;
-          const card = `hsl(${lerp(230, 0, t)}, 8%, ${lerp(10, 100, t)}%)`;
-          const border = `hsl(${lerp(230, 0, t)}, 8%, ${lerp(15, 80, t)}%)`;
-          const accent = `hsl(0, 0%, ${lerp(82, 30, t)}%)`;
-          const accent2 = `hsl(0, 0%, ${lerp(75, 40, t)}%)`;
-          document.documentElement.style.setProperty('--bg', bg);
-          document.documentElement.style.setProperty('--text', text);
-          document.documentElement.style.setProperty('--card', card);
-          document.documentElement.style.setProperty('--border', border);
-          document.documentElement.style.setProperty('--accent', accent);
-          document.documentElement.style.setProperty('--accent-2', accent2);
-        }
-        function onScroll(){
-          const h = document.documentElement.scrollHeight - window.innerHeight;
-          const t = clamp(window.scrollY / Math.max(1, h), 0, 1);
-          setTheme(t);
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('load', onScroll);
-      })();
-    </script>
+    
 
     <!-- App scripts (split into small files) -->
     <script type="text/babel" data-presets="env,react" src="src/data/experience.js"></script>
     <script type="text/babel" data-presets="env,react" src="src/data/site.js"></script>
     <script type="text/babel" data-presets="env,react" src="src/components/Terminal.jsx"></script>
     <script type="text/babel" data-presets="env,react" src="src/components/ExperienceTimeline.jsx"></script>
-    <script type="text/babel" data-presets="env,react" src="src/components/Projects.jsx"></script>
+    
     <script type="text/babel" data-presets="env,react" src="src/App.jsx"></script>
     <script type="text/babel" data-presets="env,react" src="src/index.jsx"></script>
   </body>

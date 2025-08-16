@@ -102,7 +102,7 @@ const Terminal = () => {
     const locR = gl.getUniformLocation(prog, 'r');
     const locT = gl.getUniformLocation(prog, 't');
 
-    const COUNT = 2000;
+    const COUNT = 1200;
     const data = new Float32Array(COUNT*2);
     for(let i=0;i<COUNT;i++){ data[2*i] = Math.random(); data[2*i+1] = Math.random(); }
     const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
