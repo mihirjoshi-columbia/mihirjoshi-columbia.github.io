@@ -33,8 +33,7 @@ const Section = ({ id, children, ariaLabel }) => (
 
 const Contact = () => (
   <div className="contact">
-    <div className="section-head" style={{justifyContent:'center', alignItems:'center', gap:12}}>
-      <img src="Headshot.png" alt="Headshot of Mihir Joshi" className="headshot" />
+    <div className="section-head" style={{justifyContent:'center'}}>
       <h2>Contact</h2>
     </div>
     <p className="subtitle">Open to collaboration, roles, and good ideas.</p>
@@ -42,6 +41,9 @@ const Contact = () => (
       <a className="cta" href={`mailto:${window.SITE?.contact?.email || ''}`}>Email</a>
       <a className="cta" href={window.SITE?.contact?.linkedin || '#'} target="_blank" rel="noreferrer">LinkedIn</a>
       <a className="cta" href={window.SITE?.contact?.github || '#'} target="_blank" rel="noreferrer">GitHub</a>
+      {window.SITE?.contact?.calendly && (
+        <a className="cta" href={window.SITE.contact.calendly} target="_blank" rel="noreferrer">Book 15‑min chat</a>
+      )}
     </div>
   </div>
 );

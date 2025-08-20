@@ -1,4 +1,13 @@
 window.SITE = {
+  hero: {
+    title: "Hi! My name is Mihir (Me-here)",
+    subtitle: "Columbia CS. Focused on low-latency systems, clean DX, and measurable impact.",
+    skills: [
+      "C++", "Rust", "TypeScript", "Python",
+      "Systems", "Low-latency", "Backend",
+      "PostgreSQL", "Vim", "Infra",
+    ]
+  },
   files: {
     "aboutme.txt": `Hi, I'm Mihir. I'm a Columbia student who loves systems, trading infra, and building clean tools. This site is a small React app deployed on GitHub Pages.
 
@@ -16,7 +25,8 @@ Try: cd experience | cd projects | cd contact`,
         "Realtime collaboration with activity feed, document previews, and granular permissions"
       ],
       stack: ["TypeScript", "Next.js", "PostgreSQL", "Prisma", "AWS"],
-      link: "#"
+      repo: "#",
+      demo: "#"
     },
     {
       title: "Kalshi Dashboard",
@@ -28,7 +38,8 @@ Try: cd experience | cd projects | cd contact`,
         "Desktop packaging via Electron with secure auto-updates and offline cache"
       ],
       stack: ["Rust", "C#", ".NET", "Electron", "PostgreSQL"],
-      link: "#"
+      repo: "#",
+      demo: "#"
     },
     {
       title: "Geospatial Live",
@@ -40,13 +51,15 @@ Try: cd experience | cd projects | cd contact`,
         "Role-based alerts with runbooks, on-call rotations, and SLA reporting"
       ],
       stack: ["Python", "FastAPI", "Kafka", "Mapbox GL", "TimescaleDB"],
-      link: "#"
+      repo: "#",
+      demo: "#"
     }
   ],
   contact: {
     email: "mnj2122@columbia.edu",
     linkedin: "https://linkedin.com/in/mihirjoshi-columbia",
-    github: "https://github.com/mihirjoshi-columbia/"
+    github: "https://github.com/mihirjoshi-columbia/",
+    calendly: "https://calendly.com/mnj2122-columbia"
   }
 };
 

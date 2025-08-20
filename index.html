@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mihir Joshi — Portfolio</title>
+    <meta name="description" content="Mihir Joshi — I build fast, reliable trading infrastructure and systems tooling." />
+    <meta property="og:title" content="Mihir Joshi — Portfolio" />
+    <meta property="og:description" content="I build fast, reliable trading infra and systems tooling." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mihirjoshi.github.io" />
+    <meta property="og:image" content="Headshot.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mihir Joshi — Portfolio" />
+    <meta name="twitter:description" content="I build fast, reliable trading infra and systems tooling." />
+    <meta name="theme-color" content="#0e0e10" />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
 
     <!-- Fonts (system-first) -->
     <style>
@@ -161,13 +172,31 @@
       .snake-pad .btn { width:42px; height:42px; border-radius:10px; border:1px solid var(--border); background:#121522; color:var(--text); display:grid; place-items:center; }
       @media (max-width: 640px) { .snake-pad { display:flex; } }
 
+      /* Project actions */
+      .proj-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+
       /* Headshot next to Contact heading */
-      .headshot { width: 44px; height: 44px; border-radius: 999px; border:1px solid var(--border); box-shadow: var(--shadow); object-fit: cover; }
+      .headshot { width: 110px; height: 110px; border-radius: 999px; border:1px solid var(--border); box-shadow: var(--shadow); object-fit: cover; }
 
       /* Hero canvas behind terminal */
-      .hero-area { position: relative; width: min(1000px, 92vw); height: 460px; margin: 0 auto; }
+      .hero-area { position: relative; width: min(1000px, 92vw); margin: 0 auto; }
       .hero-bg-canvas { position: absolute; inset: 0; z-index: 0; opacity: .85; pointer-events: none; }
       .hero-foreground { position: relative; z-index: 1; }
+      /* Profile card next to terminal */
+      .hero-grid { display:grid; grid-template-columns: 1fr 320px; gap:18px; align-items:stretch; }
+      .profile-card { background: rgba(20,20,24,0.55); border:1px solid var(--border); border-radius:16px; box-shadow: var(--shadow); padding:16px; display:grid; gap:12px; align-content:start; }
+      .profile-headshot { width:100%; aspect-ratio:1/1; border-radius:14px; object-fit:cover; border:1px solid var(--border); }
+      .profile-name { margin:0; font-size:20px; }
+      .profile-meta { margin:0; color:var(--accent-2); font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+      .profile-about { margin:0; color:var(--muted); font-size:14px; }
+      @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+      /* Hero intro and skills */
+      .hero-intro { margin: 0 0 14px 0; text-align: left; }
+      .hero-title { margin: 0; font-weight: 800; font-size: clamp(28px, 4.8vw, 40px); letter-spacing: -0.01em; }
+      .hero-subtitle { margin: 6px 0 0 0; color: var(--muted); font-size: clamp(15px, 2.4vw, 18px); }
+      .skills { margin-top: 18px; }
+      .skills-chips { display:flex; flex-wrap:wrap; gap:8px; }
 
       /* Section headings */
       .section-head {
@@ -185,16 +214,34 @@
         color: var(--text); text-decoration: none; font-weight: 600; box-shadow: var(--shadow);
       }
 
+      /* Focus visibility for keyboard users */
+      .nav a:focus-visible, .cta:focus-visible, .proj-nav:focus-visible { outline: 2px solid #2b3248; outline-offset: 2px; }
+
+      /* Skip link */
+      .skip-link { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+      .skip-link:focus { position: fixed; left: 16px; top: 16px; width: auto; height: auto; padding: 8px 12px; background:#161a27; color: var(--text); border-radius: 8px; border:1px solid var(--border); box-shadow: var(--shadow); z-index: 70; }
+
       /* Small screens */
       @media (max-width: 640px) {
         .nav { left: 12px; right: 12px; transform: none; }
         .section-head { flex-direction: column; align-items: flex-start; }
+        .hero-intro { text-align: center; }
+        .hero-title { font-size: clamp(24px, 7vw, 36px); }
+        .hero-subtitle { font-size: clamp(14px, 4vw, 17px); }
+        .nav a { padding: 10px 14px; font-size: 15px; }
+        .skills-chips { justify-content: center; }
       }
       /* Smooth scroll momentum */
       html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+        .timeline-card:hover { transform: none; box-shadow: var(--shadow); }
+        .card:hover { transform: none; }
+      }
     </style>
   </head>
   <body>
+    <a href="#home" class="skip-link">Skip to content</a>
     <!-- Fixed resume buttons -->
     <div class="resume-ctas" aria-label="Resume links">
       <a class="btn-resume" href="qd_resume.pdf" target="_blank" rel="noreferrer">Quant Dev Resume</a>

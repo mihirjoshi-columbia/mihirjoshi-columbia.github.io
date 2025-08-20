@@ -28,23 +28,46 @@ const Terminal = () => {
   return (
     <div className="hero-area">
       <div className="hero-foreground">
-        <div className="terminal-wrap">
-          <div className="terminal" role="region" aria-label="Interactive terminal">
-            <div className="term-topbar">
-              <span className="dot r"></span><span className="dot y"></span><span className="dot g"></span>
-              <span className="term-title">bash — ~</span>
-            </div>
-            <div className="term-body" ref={outRef}>
-              <div className="term-output">
-                {lines.map((ln, i) => <div key={i}>{ln}</div>)}
-                <div className="term-line">
-                  <span className="prompt">mihir@columbia:~$</span>
-                  <input className="input" autoFocus value={value} onChange={e=>setValue(e.target.value)} onKeyDown={onKeyDown} aria-label="terminal input" />
+        <div className="hero-grid">
+          <div className="terminal-wrap">
+            <div className="hero-intro">
+              <h1 className="hero-title">{window.SITE?.hero?.title || ""}</h1>
+              <p className="hero-subtitle">{window.SITE?.hero?.subtitle || ""}</p>
+              {Array.isArray(window.SITE?.hero?.skills) && window.SITE.hero.skills.length > 0 && (
+                <div className="skills">
+                  <div className="skills-chips">
+                    {window.SITE.hero.skills.map((s, i) => (
+                      <span key={i} className="chip">{s}</span>
+                    ))}
+                  </div>
                 </div>
-                <div className="help">Try: <code>ls</code>, <code>cat aboutme.txt</code>, <code>cd experience</code>, <code>./surprise</code></div>
+              )}
+            </div>
+            <div className="terminal" role="region" aria-label="Interactive terminal">
+              <div className="term-topbar">
+                <span className="dot r"></span><span className="dot y"></span><span className="dot g"></span>
+                <span className="term-title">bash — ~</span>
+              </div>
+              <div className="term-body" ref={outRef}>
+                <div className="term-output">
+                  {lines.map((ln, i) => <div key={i}>{ln}</div>)}
+                  <div className="term-line">
+                    <span className="prompt">mihir@columbia:~$</span>
+                    <input className="input" autoFocus value={value} onChange={e=>setValue(e.target.value)} onKeyDown={onKeyDown} aria-label="terminal input" />
+                  </div>
+                  <div className="help">Try: <code>ls</code>, <code>cat aboutme.txt</code>, <code>cd experience</code>, <code>./surprise</code></div>
+                </div>
               </div>
             </div>
           </div>
+          <aside className="profile-card" aria-label="Profile summary">
+            <img className="profile-headshot" src="Headshot.png" alt="Headshot of Mihir Joshi" loading="eager" width="320" height="320" />
+            <div>
+              <p className="profile-meta">About</p>
+              <h3 className="profile-name">Mihir Joshi</h3>
+              <p className="profile-about">Columbia CS — systems, trading infra, and clean tooling. Building fast, reliable things.</p>
+            </div>
+          </aside>
         </div>
       </div>
     </div>

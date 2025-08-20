@@ -153,11 +153,32 @@ function ProjectCarousel({ items }){
   const [idx, setIdx] = React.useState(0);
   const has = Array.isArray(items) ? items.length : 0;
   const current = has ? items[idx % has] : null;
+  React.useEffect(()=>{
+    // deep-linking with hash like #projects=2
+    const m = (location.hash || '').match(/projects=(\d+)/);
+    if(m){ const n = parseInt(m[1], 10); if(Number.isFinite(n)){ setIdx(Math.max(0, Math.min(n, has-1))); } }
+  }, [has]);
+  React.useEffect(()=>{
+    // update hash when slide changes (non-destructive)
+    const base = (location.hash || '').replace(/projects=\d+/, '').replace(/[#&]$/, '');
+    const sep = base.includes('#') ? '&' : '#';
+    const nextHash = `${base}${sep}projects=${idx}`;
+    history.replaceState(null, '', nextHash);
+  }, [idx]);
   function prev(){ if(has) setIdx((i)=> (i-1+has)%has); }
   function next(){ if(has) setIdx((i)=> (i+1)%has); }
+  // keyboard support for carousel
+  React.useEffect(()=>{
+    function onKey(e){
+      if(e.key === 'ArrowLeft'){ prev(); }
+      if(e.key === 'ArrowRight'){ next(); }
+    }
+    window.addEventListener('keydown', onKey);
+    return ()=> window.removeEventListener('keydown', onKey);
+  }, [has]);
   if(!has) return null;
   return (
-    <div className="proj-carousel" role="region" aria-label="Projects carousel">
+    <div className="proj-carousel" role="region" aria-label="Projects carousel" aria-live="polite">
       <button className="proj-nav" aria-label="Previous" onClick={prev}>◀</button>
       <div className="proj-card">
         {current && current.render ? (
@@ -168,6 +189,10 @@ function ProjectCarousel({ items }){
               <div className="proj-tag">{current.tag}</div>
               <h3 className="proj-title">{current.title}</h3>
               <p className="proj-blurb">{current.blurb}</p>
+              <div className="proj-actions">
+                {current.demo && (<a className="cta" href={current.demo} target="_blank" rel="noreferrer">Live demo</a>)}
+                {current.repo && (<a className="cta" href={current.repo} target="_blank" rel="noreferrer">View code</a>)}
+              </div>
             </div>
             <div className="proj-b">
               {Array.isArray(current.bullets) && current.bullets.length > 0 && (
