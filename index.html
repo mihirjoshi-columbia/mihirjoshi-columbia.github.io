@@ -66,6 +66,11 @@
       .nav a.active { color: var(--text); background: var(--navpill); }
       .nav a:hover { color: var(--text); }
 
+      /* Top-right resume buttons */
+      .resume-ctas { position: fixed; top: 16px; right: 16px; display: flex; gap: 8px; z-index: 60; }
+      .btn-resume { display:inline-block; padding: 10px 12px; border-radius: 10px; border:1px solid var(--border); background:#161a27; color: var(--text); text-decoration:none; font-weight:700; font-size:13px; box-shadow: var(--shadow); }
+      .btn-resume:focus { outline: 2px solid #2b3248; outline-offset: 2px; }
+
       /* Terminal (hero replacement) */
       .terminal-wrap { width: min(880px, 92vw); margin: 0 auto; }
       .terminal {
@@ -137,17 +142,17 @@
       .snake-canvas { display:block; width: 100%; height: 100%; background: #0f1116; }
       /* Project carousel */
       .proj-carousel { display:flex; align-items:stretch; gap:14px; width:min(1000px,92vw); margin:0 auto; }
-      .proj-card { flex:1; background: var(--card); border:1px solid var(--border); border-radius:18px; padding:24px; box-shadow: var(--shadow); min-height: 520px; display:grid; }
+      .proj-card { flex:1; background: var(--card); border:1px solid var(--border); border-radius:18px; padding:28px; box-shadow: var(--shadow); display:grid; }
       .proj-tag { color: var(--accent-2); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing:.06em; }
-      .proj-title { margin:4px 0 0 0; font-size:24px; letter-spacing:-0.01em; }
-      .proj-blurb { margin:6px 0 0 0; color: var(--muted); font-size:16px; line-height:1.6; }
+      .proj-title { margin:4px 0 0 0; font-size:28px; letter-spacing:-0.01em; }
+      .proj-blurb { margin:8px 0 0 0; color: var(--muted); font-size:17px; line-height:1.7; }
       .proj-nav { width:42px; height:42px; border-radius:12px; border:1px solid var(--border); background: #161a27; color: var(--text); cursor:pointer; box-shadow: var(--shadow); }
       /* Dense project layout */
-      .proj-inner { display:grid; grid-template-columns: 1.1fr 0.9fr; gap:18px; align-content:start; height:100%; }
-      .proj-a { display:grid; align-content:start; gap:10px; }
-      .proj-b { display:grid; align-content:start; gap:12px; }
+      .proj-inner { display:grid; grid-template-columns: minmax(280px,1fr) minmax(280px,1fr); gap:22px; align-items:start; }
+      .proj-a { display:grid; align-content:start; gap:12px; }
+      .proj-b { display:grid; align-content:start; gap:14px; }
       .proj-b ul { margin:0; padding-left:18px; }
-      .proj-b li { margin:6px 0; }
+      .proj-b li { margin:6px 0; font-size:16px; line-height:1.6; }
       @media (max-width: 720px) { .proj-inner { grid-template-columns: 1fr; } }
       .snake-controls { display:flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
       .snake-overlay { position:absolute; inset:0; display:grid; place-items:center; background: rgba(4,6,10,0.45); backdrop-filter: blur(2px); color: var(--text); font-weight:700; letter-spacing: .02em; }
@@ -155,6 +160,9 @@
       .snake-pad { display:none; gap:8px; justify-content:center; align-items:center; margin-top:10px; }
       .snake-pad .btn { width:42px; height:42px; border-radius:10px; border:1px solid var(--border); background:#121522; color:var(--text); display:grid; place-items:center; }
       @media (max-width: 640px) { .snake-pad { display:flex; } }
+
+      /* Headshot next to Contact heading */
+      .headshot { width: 44px; height: 44px; border-radius: 999px; border:1px solid var(--border); box-shadow: var(--shadow); object-fit: cover; }
 
       /* Hero canvas behind terminal */
       .hero-area { position: relative; width: min(1000px, 92vw); height: 460px; margin: 0 auto; }
@@ -187,6 +195,11 @@
     </style>
   </head>
   <body>
+    <!-- Fixed resume buttons -->
+    <div class="resume-ctas" aria-label="Resume links">
+      <a class="btn-resume" href="qd_resume.pdf" target="_blank" rel="noreferrer">Quant Dev Resume</a>
+      <a class="btn-resume" href="swe_resume.pdf" target="_blank" rel="noreferrer">Software Eng Resume</a>
+    </div>
     <!-- Simple fixed nav -->
     <nav class="nav" id="top-nav">
       <a href="#home" data-id="home" class="active">Home</a>

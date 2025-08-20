@@ -33,7 +33,8 @@ const Section = ({ id, children, ariaLabel }) => (
 
 const Contact = () => (
   <div className="contact">
-    <div className="section-head" style={{justifyContent:'center'}}>
+    <div className="section-head" style={{justifyContent:'center', alignItems:'center', gap:12}}>
+      <img src="Headshot.png" alt="Headshot of Mihir Joshi" className="headshot" />
       <h2>Contact</h2>
     </div>
     <p className="subtitle">Open to collaboration, roles, and good ideas.</p>

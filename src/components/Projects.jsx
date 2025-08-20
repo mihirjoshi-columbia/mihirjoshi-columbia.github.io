@@ -134,7 +134,7 @@ const Projects = () => {
         <canvas ref={canvasRef} className="snake-canvas"/>
       </div>
       <div className="snake-controls"></div>
-      <div className="help" style={{marginTop:10}}>Use WASD/arrow keys. Space to pause.</div>
+      <div className="help" style={{marginTop:10}}>Built this in JS for fun. Use WASD/arrow keys. Space to pause.</div>
     </div>
   );
 
