@@ -6,9 +6,42 @@ Try: cd experience | cd projects | cd contact`,
     "interests.txt": `Interests: low-latency systems, C++/Rust, data viz, sports analytics, and good coffee.`
   },
   projects: [
-    { title: "DealHive", tag: "Platform", blurb: "End-to-end M&A workflow + lead exchange with fee splits.", link: "#" },
-    { title: "Kalshi Dashboard", tag: "Trading", blurb: "Event markets dashboard, PostgreSQL + Rust/C# API + Electron.", link: "#" },
-    { title: "Geospatial Live", tag: "Civic Tech", blurb: "IoT + GIS real-time infrastructure monitoring.", link: "#" }
+    {
+      title: "DealHive",
+      tag: "Platform",
+      blurb: "Deal origination and execution platform streamlining M&A workflows from sourcing to close.",
+      bullets: [
+        "Unified pipeline for deal sourcing, diligence checklists, and stakeholder communications",
+        "Embedded fee-split agreements with role-based access and audit trails",
+        "Realtime collaboration with activity feed, document previews, and granular permissions"
+      ],
+      stack: ["TypeScript", "Next.js", "PostgreSQL", "Prisma", "AWS"],
+      link: "#"
+    },
+    {
+      title: "Kalshi Dashboard",
+      tag: "Trading",
+      blurb: "High-signal dashboard for event markets with fast data ingestion and custom risk views.",
+      bullets: [
+        "Streaming market data ETL with snapshot + delta architecture (<200ms median lag)",
+        "Greeks-like risk surfaces and scenario analysis for event contracts",
+        "Desktop packaging via Electron with secure auto-updates and offline cache"
+      ],
+      stack: ["Rust", "C#", ".NET", "Electron", "PostgreSQL"],
+      link: "#"
+    },
+    {
+      title: "Geospatial Live",
+      tag: "Civic Tech",
+      blurb: "Operational dashboard for real-time infrastructure telemetry and incident response.",
+      bullets: [
+        "Device twin model with health scoring and anomaly detection on location/time features",
+        "Vector tiles rendering for millions of points with smooth zoom and cluster aggregation",
+        "Role-based alerts with runbooks, on-call rotations, and SLA reporting"
+      ],
+      stack: ["Python", "FastAPI", "Kafka", "Mapbox GL", "TimescaleDB"],
+      link: "#"
+    }
   ],
   contact: {
     email: "mnj2122@columbia.edu",

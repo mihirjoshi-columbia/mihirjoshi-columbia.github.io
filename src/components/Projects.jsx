@@ -53,7 +53,8 @@ const Projects = () => {
     // Draw in CSS pixel space
     ctx.setTransform(dprRef.current, 0, 0, dprRef.current, 0, 0);
     const w = canvas.width / dprRef.current; const h = canvas.height / dprRef.current;
-    const cell = Math.max(8, Math.floor(w / grid));
+    // Ensure the computed grid fits entirely within the visible canvas in both dimensions
+    const cell = Math.floor(Math.min(w, h) / grid);
     const playW = cell * grid;
     const playH = cell * grid;
     const offX = Math.floor((w - playW) / 2);
@@ -89,7 +90,11 @@ const Projects = () => {
     const now=performance.now(); if(now-lastTickRef.current < speedMs){ rafRef.current=requestAnimationFrame(update); return; }
     lastTickRef.current=now;
     const {grid,snake}=stateRef.current; const dir=dirRef.current;
-    const head={x:(snake[0].x+dir.x+grid)%grid, y:(snake[0].y+dir.y+grid)%grid};
+    const nextX = snake[0].x + dir.x;
+    const nextY = snake[0].y + dir.y;
+    // collide with walls (aligns with visible bounds)
+    if(nextX < 0 || nextX >= grid || nextY < 0 || nextY >= grid){ setRunning(false); return; }
+    const head={x:nextX, y:nextY};
     // collide with self
     if(snake.some((s,i)=>i>0 && s.x===head.x && s.y===head.y)){ setRunning(false); return; }
     snake.unshift(head);
@@ -158,11 +163,29 @@ function ProjectCarousel({ items }){
         {current && current.render ? (
           current.render()
         ) : (
-          <>
-            <div className="proj-tag">{current.tag}</div>
-            <h3 className="proj-title">{current.title}</h3>
-            <p className="proj-blurb">{current.blurb}</p>
-          </>
+          <div className="proj-inner">
+            <div className="proj-a">
+              <div className="proj-tag">{current.tag}</div>
+              <h3 className="proj-title">{current.title}</h3>
+              <p className="proj-blurb">{current.blurb}</p>
+            </div>
+            <div className="proj-b">
+              {Array.isArray(current.bullets) && current.bullets.length > 0 && (
+                <ul>
+                  {current.bullets.map((b, i) => (
+                    <li key={i} style={{color:'var(--muted)'}}>{b}</li>
+                  ))}
+                </ul>
+              )}
+              {Array.isArray(current.stack) && current.stack.length > 0 && (
+                <div className="meta-chips">
+                  {current.stack.map((s, i) => (
+                    <span key={i} className="chip">{s}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
       <button className="proj-nav" aria-label="Next" onClick={next}>▶</button>
