@@ -46,11 +46,18 @@ const Contact = () => (
 );
 
 function App() {
-  useSectionObserver(["home","experience","contact"]);
+  useSectionObserver(["home","experience","projects","contact"]);
   return (
     <>
       <Section id="home" ariaLabel="Landing"><Terminal/></Section>
       <Section id="experience" ariaLabel="Experience"><ExperienceTimeline/></Section>
+      <Section id="projects" ariaLabel="Projects">
+        <div className="section-head" style={{justifyContent:'space-between'}}>
+          <h2>Projects</h2>
+          <p className="subtitle">Selected builds</p>
+        </div>
+        <Projects/>
+      </Section>
       <Section id="contact" ariaLabel="Contact"><Contact/></Section>
     </>
   );

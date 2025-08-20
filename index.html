@@ -89,7 +89,7 @@
       .term-body { padding: 16px; min-height: 360px; background: transparent; }
       .term-output { white-space: pre-wrap; line-height: 1.55; font-size: 14px; color: var(--text); }
       .term-line { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
-      .prompt { color: #bfbfbf; }
+      .prompt { color: #20c997; font-weight: 700; }
       .input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font: inherit; }
       .help { color: var(--muted); font-size: 13px; margin-top: 12px; }
 
@@ -112,13 +112,13 @@
       .meta { color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 
       /* Timeline */
-      .timeline { position: relative; }
+      .timeline { position: relative; padding-top: 6px; }
       .timeline::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, rgba(43,50,72,0.8), rgba(43,50,72,0.2)); filter: blur(.2px); }
-      .timeline-item { position: relative; margin: 0 0 18px 0; padding-left: 40px; contain: content; content-visibility: auto; }
+      .timeline-item { position: relative; margin: 12px 0 18px 0; padding-left: 40px; overflow: visible; }
       .timeline-node { position:absolute; left: 12px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: #3a5ca9; box-shadow: 0 0 0 2px rgba(58,92,169,0.25); opacity:.9; }
       .timeline-connector { position:absolute; left: 21px; top: 22px; width: 18px; height: 2px; background: #2b3248; transform-origin: left center; transition: transform .2s ease, background .2s ease; }
-      .timeline-card { margin-left: 0; }
-      .timeline-card:hover { transform: translateY(-3px) scale(1.02); border-color: #2b3248; }
+      .timeline-card { margin-left: 0; will-change: transform; }
+      .timeline-card:hover { transform: translateY(-6px) scale(1.01); border-color: #2b3248; box-shadow: 0 16px 50px rgba(0,0,0,0.45); }
       .timeline-item:hover .timeline-connector { transform: scaleX(1.12); background:#3a5ca9; }
       .timeline-card .meta-row { display: flex; gap: 8px; align-items: center; color: var(--accent-2); font-size: 12px; font-weight: 700; text-transform: uppercase; }
       .timeline-card .meta-row .sep { opacity: 0.6; }
@@ -133,8 +133,15 @@
       .snake-title { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
       .snake-meta { display:flex; gap: 12px; align-items:center; }
       .snake-score { font-weight: 700; color: var(--accent-2); }
-      .snake-canvas-wrap { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
-      .snake-canvas { display:block; width: 100%; height: 420px; background: #0f1116; }
+      .snake-canvas-wrap { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); height: 420px; }
+      .snake-canvas { display:block; width: 100%; height: 100%; background: #0f1116; }
+      /* Project carousel */
+      .proj-carousel { display:flex; align-items:stretch; gap:14px; width:min(1000px,92vw); margin:0 auto; }
+      .proj-card { flex:1; background: var(--card); border:1px solid var(--border); border-radius:18px; padding:20px; box-shadow: var(--shadow); min-height: 520px; display:grid; gap:8px; }
+      .proj-tag { color: var(--accent-2); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing:.06em; }
+      .proj-title { margin:0; font-size:20px; }
+      .proj-blurb { margin:0; color: var(--muted); }
+      .proj-nav { width:42px; height:42px; border-radius:12px; border:1px solid var(--border); background: #161a27; color: var(--text); cursor:pointer; box-shadow: var(--shadow); }
       .snake-controls { display:flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
       .snake-overlay { position:absolute; inset:0; display:grid; place-items:center; background: rgba(4,6,10,0.45); backdrop-filter: blur(2px); color: var(--text); font-weight:700; letter-spacing: .02em; }
       .snake-grid { position:absolute; inset:0; pointer-events:none; opacity:.06; }
@@ -177,6 +184,7 @@
     <nav class="nav" id="top-nav">
       <a href="#home" data-id="home" class="active">Home</a>
       <a href="#experience" data-id="experience">Experience</a>
+      <a href="#projects" data-id="projects">Projects</a>
       <a href="#contact" data-id="contact">Contact</a>
     </nav>
 
@@ -196,6 +204,7 @@
     <script type="text/babel" data-presets="env,react" src="src/data/site.js"></script>
     <script type="text/babel" data-presets="env,react" src="src/components/Terminal.jsx"></script>
     <script type="text/babel" data-presets="env,react" src="src/components/ExperienceTimeline.jsx"></script>
+    <script type="text/babel" data-presets="env,react" src="src/components/Projects.jsx"></script>
     
     <script type="text/babel" data-presets="env,react" src="src/App.jsx"></script>
     <script type="text/babel" data-presets="env,react" src="src/index.jsx"></script>
