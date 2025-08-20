@@ -1,6 +1,6 @@
 window.SITE = {
   hero: {
-    title: "Hi! My name is Mihir (Me-here)",
+    title: "Hi! My name is Mihir",
     subtitle: "Columbia CS. Focused on low-latency systems, clean DX, and measurable impact.",
     skills: [
       "C++", "Rust", "TypeScript", "Python",
