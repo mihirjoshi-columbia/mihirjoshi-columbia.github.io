@@ -42,7 +42,7 @@ const Contact = () => (
       <a className="cta" href={window.SITE?.contact?.linkedin || '#'} target="_blank" rel="noreferrer">LinkedIn</a>
       <a className="cta" href={window.SITE?.contact?.github || '#'} target="_blank" rel="noreferrer">GitHub</a>
       {window.SITE?.contact?.calendly && (
-        <a className="cta" href={window.SITE.contact.calendly} target="_blank" rel="noreferrer">Book 15‑min chat</a>
+        <a className="cta" href={window.SITE.contact.calendly} target="_blank" rel="noreferrer">Book 30‑min chat</a>
       )}
     </div>
   </div>

@@ -1,7 +1,7 @@
 window.SITE = {
   hero: {
     title: "Hi! My name is Mihir",
-    subtitle: "Columbia CS. Focused on low-latency systems, clean DX, and measurable impact.",
+    subtitle: "Columbia CS. Focused on low-latency systems, core systems, and impactful work.",
     skills: [
       "C++", "Rust", "TypeScript", "Python",
       "Systems", "Low-latency", "Backend",
@@ -42,17 +42,31 @@ Try: cd experience | cd projects | cd contact`,
       demo: "#"
     },
     {
-      title: "Geospatial Live",
-      tag: "Civic Tech",
-      blurb: "Operational dashboard for real-time infrastructure telemetry and incident response.",
+      slug: "round-robin-scheduler",
+      title: "Round-Robin Scheduler",
+      tag: "Systems",
+      blurb: "Implemented a preemptive round-robin scheduler for process time-slicing and fairness.",
       bullets: [
-        "Device twin model with health scoring and anomaly detection on location/time features",
-        "Vector tiles rendering for millions of points with smooth zoom and cluster aggregation",
-        "Role-based alerts with runbooks, on-call rotations, and SLA reporting"
+        "Built core scheduling loop with fixed quantum and context-switch accounting",
+        "Designed ready queue and time accounting to ensure starvation-free fairness",
+        "Verified correctness with adversarial workloads and stress scenarios"
       ],
-      stack: ["Python", "FastAPI", "Kafka", "Mapbox GL", "TimescaleDB"],
+      stack: ["C/eBPF", "Operating Systems", "POSIX", "Linux"],
       repo: "#",
       demo: "#"
+    },
+    {
+      slug: "lightweight-http-server",
+      title: "Lightweight HTTP Server",
+      tag: "Systems",
+      blurb: "A minimal HTTP/1.1 server built entirely in C with epoll and zero-copy sendfile.",
+      bullets: [
+        "Implements parsing, routing, and static file serving with keep-alive",
+        "Uses non-blocking sockets + epoll for high concurrency on a single thread",
+        "Benchmarked with wrk; stable under thousands of concurrent connections"
+      ],
+      stack: ["C", "POSIX"],
+      repo: "https://gist.github.com/mihirjoshi-columbia/a1cfe4c9042a94919107c81d3f5129f2"
     }
   ],
   contact: {

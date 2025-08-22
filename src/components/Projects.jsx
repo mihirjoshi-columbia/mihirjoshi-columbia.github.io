@@ -190,8 +190,9 @@ function ProjectCarousel({ items }){
               <h3 className="proj-title">{current.title}</h3>
               <p className="proj-blurb">{current.blurb}</p>
               <div className="proj-actions">
-                {current.demo && (<a className="cta" href={current.demo} target="_blank" rel="noreferrer">Live demo</a>)}
-                {current.repo && (<a className="cta" href={current.repo} target="_blank" rel="noreferrer">View code</a>)}
+                {current.slug === 'lightweight-http-server' && current.repo && (
+                  <a className="cta" href={current.repo} target="_blank" rel="noreferrer">View code</a>
+                )}
               </div>
             </div>
             <div className="proj-b">
