@@ -3,6 +3,7 @@ const Projects = () => {
   const canvasRef = React.useRef(null);
   const [score, setScore] = React.useState(0);
   const [running, setRunning] = React.useState(false);
+  const [includeSnake, setIncludeSnake] = React.useState(true);
   const dirRef = React.useRef({x:1, y:0});
   const stateRef = React.useRef({ grid: 24, snake: [{x:8,y:12},{x:7,y:12},{x:6,y:12}], food: {x:14,y:12} });
   const rafRef = React.useRef(0);
@@ -119,6 +120,14 @@ const Projects = () => {
     return ()=>cancelAnimationFrame(rafRef.current);
   }, [running]);
 
+  // Hide Snake on small screens
+  React.useEffect(()=>{
+    function onResize(){ setIncludeSnake(window.innerWidth >= 720); }
+    onResize();
+    window.addEventListener('resize', onResize);
+    return ()=> window.removeEventListener('resize', onResize);
+  }, []);
+
   const snakeCard = () => (
     <div className="snake">
       <div className="snake-header">
@@ -140,7 +149,7 @@ const Projects = () => {
 
   const siteItems = (window.SITE && window.SITE.projects) || [];
   const items = [
-    { type:'snake', title:'Blue Snake', tag:'Game', blurb:'A tiny canvas game.', render: snakeCard },
+    ...(includeSnake ? [{ type:'snake', title:'Blue Snake', tag:'Game', blurb:'A tiny canvas game.', render: snakeCard }] : []),
     ...siteItems.map(x=>({ type:'card', ...x }))
   ];
 

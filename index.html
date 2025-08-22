@@ -77,6 +77,12 @@
       .nav a.active { color: var(--text); background: var(--navpill); }
       .nav a:hover { color: var(--text); }
 
+      /* Mobile hamburger */
+      .hamburger { display:none; position: fixed; top:16px; left:16px; z-index:70; width:40px; height:40px; border-radius:10px; border:1px solid var(--border); background:#161a27; color:var(--text); box-shadow: var(--shadow); }
+      .mobile-nav { display:none; position: fixed; top:64px; left:16px; right:16px; z-index:65; background: var(--navbg); backdrop-filter: blur(8px); border:1px solid var(--border); border-radius:12px; padding:10px; box-shadow: var(--shadow); }
+      .mobile-nav a { display:block; padding:12px; color:var(--muted); text-decoration:none; border-radius:8px; }
+      .mobile-nav a.active, .mobile-nav a:hover { color:var(--text); background: var(--navpill); }
+
       /* Top-right resume buttons */
       .resume-ctas { position: fixed; top: 16px; right: 16px; display: flex; gap: 8px; z-index: 60; }
       .btn-resume { display:inline-block; padding: 10px 12px; border-radius: 10px; border:1px solid var(--border); background:#161a27; color: var(--text); text-decoration:none; font-weight:700; font-size:13px; box-shadow: var(--shadow); }
@@ -223,7 +229,9 @@
 
       /* Small screens */
       @media (max-width: 640px) {
-        .nav { left: 12px; right: 12px; transform: none; }
+        .nav { display:none; }
+        .hamburger { display:block; }
+        .mobile-nav:not([hidden]) { display:block; }
         .section-head { flex-direction: column; align-items: flex-start; }
         .hero-intro { text-align: center; }
         .hero-title { font-size: clamp(24px, 7vw, 36px); }
@@ -247,8 +255,15 @@
       <a class="btn-resume" href="qd_resume.pdf" target="_blank" rel="noreferrer">Quant Dev Resume</a>
       <a class="btn-resume" href="swe_resume.pdf" target="_blank" rel="noreferrer">Software Eng Resume</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">☰</button>
     <!-- Simple fixed nav -->
     <nav class="nav" id="top-nav">
+      <a href="#home" data-id="home" class="active">Home</a>
+      <a href="#experience" data-id="experience">Experience</a>
+      <a href="#projects" data-id="projects">Projects</a>
+      <a href="#contact" data-id="contact">Contact</a>
+    </nav>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
       <a href="#home" data-id="home" class="active">Home</a>
       <a href="#experience" data-id="experience">Experience</a>
       <a href="#projects" data-id="projects">Projects</a>
@@ -264,7 +279,26 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    
+    <script>
+      // Mobile nav toggle
+      (function(){
+        const btn = document.getElementById('hamburger');
+        const mnav = document.getElementById('mobile-nav');
+        if(!btn || !mnav) return;
+        function close(){ mnav.setAttribute('hidden', ''); btn.setAttribute('aria-expanded','false'); }
+        function open(){ mnav.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); }
+        btn.addEventListener('click', ()=>{
+          const openNow = btn.getAttribute('aria-expanded') === 'true';
+          if(openNow) close(); else open();
+        });
+        // close on navigation
+        mnav.addEventListener('click', (e)=>{
+          const t = e.target; if(t && t.matches('a[href^="#"]')) close();
+        });
+        // close on resize to desktop
+        window.addEventListener('resize', ()=>{ if(window.innerWidth > 640) close(); });
+      })();
+    </script>
 
     <!-- App scripts (split into small files) -->
     <script type="text/babel" data-presets="env,react" src="src/data/experience.js"></script>
